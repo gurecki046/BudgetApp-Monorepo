@@ -25,7 +25,9 @@ const GroupNotificationsListener = () => {
     if (!isAuthenticated) return;
 
     const token = localStorage.getItem("accessToken");
-    if (!token) return;
+    if (!token || typeof token !== 'string' || token.length < 10) {
+      return;
+    }
 
     const socket = new WebSocket(getWebSocketUrl(token));
 
